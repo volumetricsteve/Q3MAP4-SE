@@ -4,7 +4,7 @@
 # ******************************
 # THIS FILE IS LINE-COUNT SENSITIVE
 #
-# This is a table of abreviations used:
+# This is a table of abbreviations used:
 #
 # Executable Path
 # Standard Flags
