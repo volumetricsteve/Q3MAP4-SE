@@ -16,7 +16,7 @@ if [ "$1" = defaults ]
 then
 	echo "Restoring Default Configuration Values"
 	sed -i "29s#.*#EP='/data/quake3/q3map4.x86_64'#" SE.sh
-	sed -i "30s#.*#SF='-v -game quake -fs_basepath "/data/quake" -fs_game baseq3'#" SE.sh
+	sed -i "30s#.*#SF='-v -game quake3 -fs_basepath "/data/quake" -fs_game baseq3'#" SE.sh
 	sed -i "31s#.*#TC='-threads 8'#" SE.sh
 	sed -i "32s#.*#BObsp='-meta -patchmeta'#" SE.sh
 	sed -i "33s#.*#BOfastlight='-light -fast'#" SE.sh
@@ -27,7 +27,7 @@ exit
 fi
 
 EP='/data/quake3/q3map4.x86_64'
-SF='-v -game quake -fs_basepath /data/quake -fs_game baseq3'
+SF='-v -game quake3 -fs_basepath /data/quake -fs_game baseq3'
 TC='-threads 8'
 BObsp='-meta -patchmeta'
 BOfastlight='-light -fast'
@@ -59,56 +59,56 @@ then
 	EP)
 	echo "Updating Executable Path"
 	UEP=$2
-	sed -i '29s/.*/EP='$UEP'/' SE.sh
+	sed -i "29s#.*#EP='$UEP'#" SE.sh
 	exit
 	;;
 
 	SF)
 	echo "Updating Standard Flags"
 	USF=$2
-	sed -i '30s/.*/SF='$USF'/' SE.sh
+	sed -i "30s#.*#SF='$USF'#" SE.sh
 	exit
 	;;
 
 	TC)
 	echo "Updating Thread Count"
 	UTC=$2
-	sed -i '31s/.*/TC='$UTC'/' SE.sh
+	sed -i "31s#.*#TC='$UTC'#" SE.sh
 	exit
 	;;
 
 	BObsp)
 	echo "Updating Build Options - BSP"
 	UBObsp=$2
-	sed -i '32s/.*/BObsp='$UBObsp'/' SE.sh
+	sed -i "32s#.*#BObsp='$UBObsp'#" SE.sh
 	exit
 	;;
 
 	BOfastlight)
 	echo "Updating Build Options - Fast Light"
 	UBOfastlight=$2
-	sed -i '33s/.*/BOfastlight='$UBOfastlight'/' SE.sh
+	sed -i "33s#.*#BOfastlight='$UBOfastlight'#" SE.sh
 	exit
 	;;
 
 	BOlight)
 	echo "Updating Build Options - Light"
 	UBOlight=$2
-	sed -i '34s/.*/BOlight='$UBOlight'/' SE.sh
+	sed -i "34s#.*#BOlight='$UBOlight'#" SE.sh
 	exit
 	;;
 
 	BOvis)
 	echo "Updating Build Options - Vis"
 	UBOvis=$2
-	sed -i '35s/.*/BOvis='$UBOvis'/' SE.sh
+	sed -i "35s#.*#BOvis='$UBOvis'#" SE.sh
 	exit
 	;;
 
 	MD)
 	echo "Updating Map Data"
 	UMD=$2
-	sed -i '36s/.*/MD='$UMD'/' SE.sh
+	sed -i "36s#.*#MD='$UMD'#" SE.sh
 	exit
 	;;
 
@@ -118,9 +118,9 @@ then
 	echo "********************************************************"
 	echo "                                                        "
 	echo "This will generate a suite of Q3MAP4 compilation scripts"
-	echo "based on the internal configuration data.  When you     "
-	echo "modify the options below, this script gets modified to  "
-	echo "store the desired changes.                              "
+	echo "based on internal configuration data.  When you modify  "
+	echo "the options below, this script gets modified to store   "
+	echo "the desired changes.                                    "
 	echo "                                                        "
 	echo "Below are the toggable options, invoked as shown:       "
 	echo "                                                        "
@@ -135,6 +135,7 @@ then
 	echo "BOvis - Build Options - Vis                             "
 	echo "MD - Map Data                                           "
 	echo "                                                        "
+	echo "show - displays the current configuration               "
 	echo "help - This help output                                 "
 	echo "q3map4-help - Write Q3MAP4 Compiler Help to a file      "
 	echo "defaults - resets the configurable options              "
@@ -146,6 +147,18 @@ then
 	q3map4-help)
 	echo "Writing Help"
 	$EP -help >> help.txt
+	exit
+	;;
+
+	show)
+	echo "EP="$EP
+	echo "SF="$SF
+	echo "TC="$TC
+	echo "BObsp="$BObsp
+	echo "BOfastlight="$BOfastlight
+	echo "BOlight="$BOlight
+	echo "BOvis="$BOvis
+	echo "MD="$MD
 	exit
 	;;
 
